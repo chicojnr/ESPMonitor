@@ -8,7 +8,7 @@
 </head>
 <body>
   <script>
-    const ws = new WebSocket('ws://espserver.onrender.com');
+    const ws = new WebSocket('wss://espserver.onrender.com');
 
     ws.addEventListener('open', () => {
       console.log('Conectado ao servidor via WebSocket');
