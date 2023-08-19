@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>WebSocket Client</title>
 </head>
 <body>
   <script>
-    const ws = new WebSocket('ws://localhost:3000');
+    const ws = new WebSocket('ws://espserver.onrender.com');
 
     ws.addEventListener('open', () => {
       console.log('Conectado ao servidor via WebSocket');
