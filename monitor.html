@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Client</title>
+</head>
+<body>
+  <script>
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.addEventListener('open', () => {
+      console.log('Conectado ao servidor via WebSocket');
+    });
+
+    ws.addEventListener('message', (event) => {
+      const data = JSON.parse(event.data);
+      const logElement = document.createElement('p');
+      logElement.textContent = `Camara #${data.equipId}\n Temperatura: ${data.temperatura}\n Tempo de Porta Aberta: ${data.estadoPorta}`;
+      document.body.appendChild(logElement);
+    });
+
+    ws.addEventListener('close', () => {
+      console.log('Conexão fechada');
+    });
+  </script>
+</body>
+</html>
