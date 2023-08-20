@@ -9,6 +9,18 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <title>ESP Monitor</title>
+  <style>
+    @media (max-width: 767px) {
+      .table-responsive {
+        font-size: 12px;
+        /* Ajuste o tamanho da fonte conforme necessário */
+      }
+
+      .accordion-body {
+        padding: 6px;
+      }
+    }
+  </style>
 </head>
 
 <body class='p-3 m-0'>
@@ -31,10 +43,10 @@
           aria-labelledby="panelsStayOpen-headingOne">
           <div class="accordion-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped align-middle">
                 <thead>
-                  <tr>
-                    <th scope="col" class="text-center">Hoário</th>
+                  <tr class="align-middle">
+                    <th scope="col" class="text-center">Horário</th>
                     <th scope="col" class="text-center">Temperatura</th>
                     <th scope="col" class="text-center">Tempo de Porta Aberta</th>
                   </tr>
@@ -85,7 +97,7 @@
           aria-labelledby="panelsStayOpen-headingThree">
           <div class="accordion-body">
             <div class="table-responsive">
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped" style="font-size: smaller;">
                 <thead>
                   <tr>
                     <th scope="col" class="text-center">Hoário</th>
