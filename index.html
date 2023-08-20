@@ -10,10 +10,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <title>ESP Monitor</title>
   <style>
-
     body {
       padding: 1rem;
     }
+
     @media (max-width: 767px) {
       .table-responsive {
         font-size: 12px;
@@ -37,98 +37,70 @@
 
 <body class='m-0 bg-dark'>
   <div class="container">
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
-            aria-controls="panelsStayOpen-collapseOne">
-            Câmara #1 &nbsp;
-            <div class="text-end">
-              Últ. Atualização: <span id="spm_ultima_atualizacao"></span>&nbsp;
-              Temperatura: <span id="spm_temperatura"></span>&nbsp;
-              Tempo de Porta Aberta: <span id="spm_tempo_porta_aberta"></span>
-            </div>
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
-          aria-labelledby="panelsStayOpen-headingOne">
-          <div class="accordion-body">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped align-middle">
-                <thead>
-                  <tr class="align-middle">
-                    <th scope="col" class="text-center">Horário</th>
-                    <th scope="col" class="text-center">Temperatura</th>
-                    <th scope="col" class="text-center">Tempo de Porta Aberta</th>
-                  </tr>
-                </thead>
-                <tbody id="tbl_log">
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle bg-light">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2" class="text-center">Horário</th>
+                <th scope="col" rowspan="2" class="text-center">Temperatura</th>
+                <th scope="col" colspan="2" class="text-center">Tempo de Porta Aberta</th>
+              </tr>
+              <tr class="align-middle">
+                <th class="text-center">Atual</th>
+                <th class="text-center">Acumulado</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_realTime">
+              <tr>
+                <td class="text-center" id="td_horario"></td>
+                <td class="text-center" id="td_temp"></td>
+                <td class="text-center" id="td_tempoAtual"></td>
+                <td class="text-center" id="td_tempoAcumulado"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-            aria-controls="panelsStayOpen-collapseTwo">
-            Câmara #2
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
-          aria-labelledby="panelsStayOpen-headingTwo">
-          <div class="accordion-body">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center">Hoário</th>
-                    <th scope="col" class="text-center">Temperatura</th>
-                    <th scope="col" class="text-center">Tempo de Porta Aberta</th>
-                  </tr>
-                </thead>
-                <tbody id="tbl_log">
-                </tbody>
-              </table>
+      <div class="col">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button id="btn_accordion" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseOne">
+                
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped align-middle">
+                    <thead>
+                      <tr class="align-middle">
+                        <th scope="col" class="text-center">Horário</th>
+                        <th scope="col" class="text-center">Temperatura</th>
+                        <th scope="col" class="text-center">Tempo de Porta Aberta</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbl_log">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-            aria-controls="panelsStayOpen-collapseThree">
-            Câmara #3
-          </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-          aria-labelledby="panelsStayOpen-headingThree">
-          <div class="accordion-body">
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped" style="font-size: smaller;">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center">Hoário</th>
-                    <th scope="col" class="text-center">Temperatura</th>
-                    <th scope="col" class="text-center">Tempo de Porta Aberta</th>
-                  </tr>
-                </thead>
-                <tbody id="tbl_log">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
 
+
   </div>
   <script>
-
+    let tempoAcumulado = 0;
     const ws = new WebSocket('wss://espserver.onrender.com');
 
     ws.addEventListener('open', () => {
@@ -137,13 +109,18 @@
 
     ws.addEventListener('message', (event) => {
       const data = JSON.parse(event.data);
-      let fahrenheit = Number(data.temperatura) * 1.8 + 32;
+      //let fahrenheit = Number(data.temperatura) * 1.8 + 32;
+      tempoAcumulado = tempoAcumulado + Number(data.estadoPorta);
       let row = $('<tr></tr>');
-      $('#spm_ultima_atualizacao').text(data.timestamp);
-      $('#spm_temperatura').text(`${data.temperatura}° C / ${fahrenheit}° F`);
-      $('#spm_tempo_porta_aberta').text(moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss'));
+      $('#td_horario').text(data.timestamp);
+      $('#td_temp').text(`${data.temperatura}° C`);
+      //$('#spm_temperatura').text(`${data.temperatura}° C / ${fahrenheit}° F`);
+      $('#td_tempoAtual').text(moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss'));
+      $('#td_tempoAcumulado').text(moment.utc(Number(tempoAcumulado) * 1000).format('HH:mm:ss'));
+      $('#btn_accordion').text(`Câmara ${data.equipId} - Log`)
       $(row).append(`<td class="text-center">${data.timestamp}</td>`);
-      $(row).append(`<td class="text-center">${data.temperatura}° C / ${fahrenheit}° F</td>`);
+      //$(row).append(`<td class="text-center">${data.temperatura}° C / ${fahrenheit}° F</td>`);
+      $(row).append(`<td class="text-center">${data.temperatura}° C</td>`);
       $(row).append(`<td class="text-center">${moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss')}</td>`);
       $('#tbl_log').prepend(row)
 
