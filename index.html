@@ -19,7 +19,12 @@
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
             aria-controls="panelsStayOpen-collapseOne">
-            Câmara #1
+            Câmara #1 &nbsp;
+            <div class="text-end">
+              Últ. Atualização: <span id="spm_ultima_atualizacao"></span>&nbsp;
+              Temperatura: <span id="spm_temperatura"></span>&nbsp;
+              Tempo de Porta Aberta: <span id="spm_tempo_porta_aberta"></span>
+            </div>
           </button>
         </h2>
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
@@ -110,9 +115,12 @@
       const data = JSON.parse(event.data);
       let fahrenheit = Number(data.temperatura) * 1.8 + 32;
       let row = $('<tr></tr>');
+      $('#spm_ultima_atualizacao').text(data.timestamp);
+      $('#spm_temperatura').text(`${data.temperatura}° C / ${fahrenheit}° F`);
+      $('#spm_tempo_porta_aberta').text(moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss'));
       $(row).append(`<td class="text-center">${data.timestamp}</td>`);
       $(row).append(`<td class="text-center">${data.temperatura}° C / ${fahrenheit}° F</td>`);
-      $(row).append(`<td class="text-center">${moment.utc(Number(data.estadoPorta)*1000).format('HH:mm:ss')}</td>`);
+      $(row).append(`<td class="text-center">${moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss')}</td>`);
       $('#tbl_log').prepend(row)
 
     });
