@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <link rel="icon" href="Mediamodifier-Design.svg" type="image/x-icon">
   <title>ESP Monitor</title>
   <style>
     body {
@@ -110,18 +111,18 @@
     ws.addEventListener('message', (event) => {
       const data = JSON.parse(event.data);
       //let fahrenheit = Number(data.temperatura) * 1.8 + 32;
-      tempoAcumulado = tempoAcumulado + Number(data.estadoPorta);
+      tempoAcumulado = tempoAcumulado + Number(data.door);
       let row = $('<tr></tr>');
       $('#td_horario').text(data.timestamp);
-      $('#td_temp').text(`${data.temperatura}° C`);
+      $('#td_temp').text(`${data.temp}° C`);
       //$('#spm_temperatura').text(`${data.temperatura}° C / ${fahrenheit}° F`);
-      $('#td_tempoAtual').text(moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss'));
+      $('#td_tempoAtual').text(moment.utc(Number(data.door) * 1000).format('HH:mm:ss'));
       $('#td_tempoAcumulado').text(moment.utc(Number(tempoAcumulado) * 1000).format('HH:mm:ss'));
       $('#btn_accordion').text(`Câmara ${data.equipId} - Log`)
       $(row).append(`<td class="text-center">${data.timestamp}</td>`);
       //$(row).append(`<td class="text-center">${data.temperatura}° C / ${fahrenheit}° F</td>`);
-      $(row).append(`<td class="text-center">${data.temperatura}° C</td>`);
-      $(row).append(`<td class="text-center">${moment.utc(Number(data.estadoPorta) * 1000).format('HH:mm:ss')}</td>`);
+      $(row).append(`<td class="text-center">${data.temp}° C</td>`);
+      $(row).append(`<td class="text-center">${moment.utc(Number(data.door) * 1000).format('HH:mm:ss')}</td>`);
       $('#tbl_log').prepend(row)
 
     });

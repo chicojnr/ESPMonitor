@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+    <style>
+        .row .icon-box>.icon,
+        .row .icon-box {
+            height: 70px !important;
+        }
+
+        .row .icon-box>.icon {
+            width: 70px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div data-role="appbar">
+            <div data-role="appbar" data-expand-point="md">
+                <img class="brand no-hover" src="Mediamodifier-Design.svg" style="height: 18px;" />
+                <a href="#" class="brand">ESP Monitor</a>
+            </div>
+        </div>
+        <br><br><br>
+        <div data-role="panel" data-title-caption="Câmara 01" data-collapsible="true"
+            data-custom-buttons="customButtons" data-title-icon="<span class='mif-meter'></span>">
+            <div class="row mt-1">
+                <div class="cell-lg-4 cell-sm-12">
+                    <div class="icon-box border bd-default">
+                        <div class="icon bg-cyan fg-white"><span class="mif-calendar"></span></div>
+                        <div class="content p-3" style="font-size: 12px;">
+                            <div class="text-upper">horário</div>
+                            <div class="text-upper text-bold text-lead">08/21/2023 12:16:10</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-4 cell-sm-12">
+                    <div class="icon-box border bd-default">
+                        <div class="icon bg-red fg-white"><span class="mif-thermometer2  ani-shuttle"></span></div>
+                        <div class="content p-3" style="font-size: 12px;">
+                            <div class="text-upper">temperatura</div>
+                            <div class="text-upper text-bold text-lead">5°C</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-lg-4 cell-sm-12">
+                    <div class="icon-box border bd-default">
+                        <div class="icon bg-cyan fg-white"><span class="mif-alarm"></span></div>
+                        <div class="content p-3" style="font-size: 12px;">
+                            <div class="text-upper">tempo de porta aberta</div>
+                            <div class="text-upper">acumulado</div>
+                            <div class="text-upper text-bold text-lead">00:00:10</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-1">
+                <div class="cell-lg-6 cell-sm-6">
+                    <div style="max-height: 300px;">
+                        <canvas id="myChart_temp"></canvas>
+                    </div>
+                </div>
+                <div class="cell-lg-6 cell-sm-6">
+                    <div style="max-height: 300px;">
+                        <canvas id="myChart_porta"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- <table class="table striped table-border mt-4" id="t-flt-2" data-role="table" data-rows="5"
+                data-rows-steps="5, 10" data-show-rows-steps="false" data-show-search="false"
+                data-filters-operator="or">
+                <thead>
+                    <tr>
+                        <th rowspan="2" data-name="timestamp">Horário</th>
+                        <th rowspan="2" data-name="temperatura">Temperatura</th>
+                        <th colspan="2" data-name="">Tempo de Porta Aberta</th>
+
+                    </tr>
+                    <tr>
+                        <th data-name="tempo_porta_atual">Atual</th>
+                        <th data-name="tempo_porta_acumulado">Acumulado</th>
+                    </tr>
+                </thead>
+            </table> -->
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('myChart_temp');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['01:51:00', '01:51:10', '01:51:20', '01:51:30', '01:51:40', '01:51:50', '01:52:00', '01:52:10', '01:52:20', '01:52:30', '01:52:40', '01:52:50'],
+                datasets: [{
+                    label: 'Temperatura',
+                    data: [5.5, 5, 5, 5, 5, 5, 5, 5, 5, 10, 5, 5],
+                    borderWidth: 2
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                    }
+                }
+            }
+        });
+
+        const ctxPorta = document.getElementById('myChart_porta');
+        new Chart(ctxPorta, {
+            type: 'line',
+            data: {
+                labels: ['01:51:00', '01:51:10', '01:51:20', '01:51:30', '01:51:40', '01:51:50', '01:52:00', '01:52:10', '01:52:20', '01:52:30', '01:52:40', '01:52:50'],
+                datasets: [{
+                    label: 'Tempo de Porta Aberta (Minutos)',
+                    data: [5.5, 5, 5, 5, 0, 0, 5, 5, 5, 10, 0, 5],
+                    borderWidth: 2
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var customButtons = [
+            // {
+            //     html: "<span class='mif-rocket'></span>",
+            //     cls: "sys-button",
+            //     onclick: "alert('You press rocket button')"
+            // },
+            {
+                html: "<span class='mif-table'></span>",
+                cls: "sys-button",
+                onclick: "alert('You press user button')"
+            },
+            {
+                html: "<span class='mif-chart-dots'></span>",
+                cls: "sys-button",
+                onclick: "alert('You press cog button')"
+            }
+        ];
+    </script>
+</body>
+
+</html>
